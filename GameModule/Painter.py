@@ -28,14 +28,14 @@ class Painter:
     for power in powerups:
       self.display.blit( power.image, power.rect.topleft )
 
-    font = pygame.font.SysFont( "monospace", 12, True )
+    font = pygame.font.SysFont( "Arial", 12, True )
 
-    points = font.render( "Poziom " + str(self.state.level+1) + " Punkty: " + str(self.state.points) + " Zycia: " + str(self.state.lives), True, (0,0,0), (255,255,255) )
+    points = font.render( "Nivel " + str(self.state.level+1) + " Pontos: " + str(self.state.points) + " Vidas: " + str(self.state.lives), True, (0,0,0), (255,255,255) )
 
     self.display.blit( points, ( 10, 10 ) )
     
     if self.paused:
       font2 = pygame.font.SysFont( "sans-serif", 48, True )
-      pauseText = font2.render( "PAUZA", True, (0,0,0) )
+      pauseText = font2.render( "PAUSADO", True, (0,0,0) )
       px,py = pauseText.get_size()
       self.display.blit( pauseText, ( 320 - px/2, 240 - py/2 ) )

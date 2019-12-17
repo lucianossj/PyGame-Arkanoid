@@ -22,16 +22,16 @@ class Game:
     pygame.init()
     pygame.mixer.init(11025)
 
-    # Bardzo ważne pole klasy, definiujące nam aktualny stan gry - od tego zależy jak będą przetwarzane zdarzenia itp.
+    # Um campo de classe muito importante, definindo o estado atual do jogo - depende de como os eventos serão processados, etc.
     self.actualState = states["START"]
 
     self.display = pygame.display.set_mode( gfx["screen"] )
     pygame.display.set_caption( "Arkanoid v" + version )
-    # Mamy 4 podstawowe obiekty, które tworzą nam grę
-    ## Painter - rysujący na ekran aktualną klatkę gry.
-    ## Mapper - odpowiadający za ładowanie mapy.
-    ## Status - przechowujący stan aktualny gry - punkty, życia, aktualnie działające efekty itp.
-    ## Objects - przechowujący aktualne obiekty w grze - kulki, bloczki, paletkę itp.
+    # Temos 4 objetos básicos que compõem o jogo para nós
+    ## Painter - desenhando o quadro do jogo atual na tela.
+    ## Mapper - responsável por carregar o mapa.
+    ## Status - armazenar o estado atual do jogo - pontos, vidas, efeitos atuais, etc.
+    ## Objects - armazenar objetos atuais no jogo - bolas, blocos, paleta, etc.
 
     self.objects = GameModule.Objects() 
     self.mapper =  GameModule.Mapper( self.objects )
@@ -42,7 +42,7 @@ class Game:
     self.newLevel()
 
   def loop(self):
-    # W pętli gry jak to w pętli gry - przetwarzamy zdarzenia, sprawdzamy stan gry i rysujemy nową klatkę.
+    # No loop do jogo, como no loop do jogo, processamos eventos, verificamos o estado do jogo e desenhamos um novo quadro.
     self.fps.tick( gfx["framerate"] )
     for event in pygame.event.get():
       self.handleGlobalEvents( event )
@@ -56,7 +56,7 @@ class Game:
       bigFont = pygame.font.SysFont( "sans-serif", 32 )
       gameOver = bigFont.render( "GAME OVER!", True, (255,255,255) )
       smallFont = pygame.font.SysFont( "sans-serif", 18 )
-      points = smallFont.render( "Punktow: " + str(self.status.points), True, (255,255,255) )
+      points = smallFont.render( "Pontos: " + str(self.status.points), True, (255,255,255) )
       self.display.blit( gameOver, (gfx["screen"][0]/2 - gameOver.get_size()[0]/2, gfx["screen"][1]/2 - gameOver.get_size()[1]/2) )
       self.display.blit( points, (gfx["screen"][0]/2 - points.get_size()[0]/2, gfx["screen"][1]/2 - gameOver.get_size()[1]/2 - 40) )
     pygame.display.update()
@@ -162,10 +162,11 @@ class Game:
 
   def generatePowerup(self):
     r = random.randint(1,3)
-    # Mamy do wygenerowania 3 powerupy:
-    # 1 - +1 żyć
-    # 2 - na 30 sekund pad jest zwiększony do 5 "kratek"
-    # 3 - dodatkowa kulka
+    # Temos 3 upgrades para gerar:
+    # 1 - +1 ao vivo 
+    # 2 - por 30 segundos o bloco é aumentado para 5 "caixas" 
+    # 3 - bola adicional
+
     print r
     if r == 1:
       self.status.lives += 1
@@ -183,7 +184,7 @@ class Game:
     if brickType == "simple":
       self.objects.setGrid( obj.x, obj.y, None )
       rand = random.randint( 0, 9 )
-      if rand == 9: # 1/10 szansy na powerupa
+      if rand == 9: # 1/10 de chance de ligar
         self.objects.spawnPowerup( obj.x, obj.y )
 
     elif brickType == "solid":

@@ -14,7 +14,7 @@ class Objects:
     self.__pad = Pad()
     self.__bg = None
 
-  # Pobiera nam tylko istniejące elementy siatki.
+  # Nos fornece apenas os elementos de grade existentes.
   def grid(self):
     ret = []
     for i in xrange(len(self.gridObjects)):
